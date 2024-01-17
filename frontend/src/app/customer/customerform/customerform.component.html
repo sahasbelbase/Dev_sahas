@@ -1,0 +1,27 @@
+
+<form>
+    <div>
+        <mat-form-field appearance="fill">
+            <!-- <input [(ngModel)]="customerObject.hotelId" matInput placeholder="hotel Id" name = "hotelId"> -->
+
+            <mat-label>Select a Branch</mat-label>
+            <mat-select [(ngModel)]="customerObject.branchId"  name ="branchId">
+              <mat-option *ngFor="let item of branchData" value="{{item.branchId }}">{{item.branchName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+        <mat-label>Select CustomerID</mat-label>
+            <mat-select [(ngModel)]="customerObject.personId" name = "personId">
+                <mat-option *ngFor="let item of personData" value="{{item.personId }}">{{item.fullName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+            <input [(ngModel)]="customerObject.userPersonId" matInput placeholder="userPersonId " name = "userPersonId">
+        </mat-form-field>
+    </div>
+    <button type = "submit" (click) = "submit()" ><mat-icon>add</mat-icon></button>
+</form>

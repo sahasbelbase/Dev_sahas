@@ -1,1 +1,47 @@
-<p>branch-form works!</p>
+
+<form>
+
+    <div *ngIf="data.action.toLowerCase()=='submit'">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Select Hotel</mat-label>
+                <mat-select [(ngModel)]="branchObject.hotelId"  name ="hotelId">
+                  <mat-option *ngFor="let item of hotelData"    value="{{item.hotelId }}">{{item.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Select an option</mat-label>
+                <mat-select [(ngModel)]="branchObject.addressTypeId" name="addressTypeId">
+                    <mat-option *ngFor="let item of typeData" [value]="item.addressTypeId">{{item.type}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+      
+            <div>
+                <mat-form-field appearance="fill">
+                    <input [(ngModel)]="branchObject.country" matInput placeholder="country" name="country">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="fill">
+                    <input [(ngModel)]="branchObject.city" matInput placeholder="city" name="city">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="fill">
+                    <input [(ngModel)]="branchObject.streetName" matInput placeholder="streetName" name="streetName">
+                </mat-form-field>
+            </div>
+    </div>
+        <mat-form-field appearance="fill">
+            <input [(ngModel)]="branchObject.branchName" matInput placeholder="name " name = "branchName">
+        </mat-form-field>
+    <div>
+        <mat-form-field appearance="fill">
+            <input [(ngModel)]="branchObject.userPersonId" matInput placeholder="userPersonId " name = "userPersonId">
+        </mat-form-field>
+    </div>
+    <button type = "submit" (click) = "submit()" ><mat-icon>add</mat-icon></button>
+</form>

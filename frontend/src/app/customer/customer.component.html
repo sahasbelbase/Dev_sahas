@@ -1,1 +1,23 @@
-<p>customer works!</p>
+<table class="table" border="1">
+    <thead>
+      <tr>
+        <th>Customer ID</th>
+        <th>Branch ID</th>
+        <th>Full Name</th>
+        <th>SSN</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of customerData">
+        <td>{{item.personId}}</td>
+        <td>{{item.branchId}}</td>
+        <td>{{item.fullName}}</td>
+        <td>{{item.sSN}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <button mat-icon-button color="primary" (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>
+  

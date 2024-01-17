@@ -1,0 +1,84 @@
+<div class="invoice-container" >
+    <span class="invoice-close" (click)="closeInvoice()">&times;</span>
+<div class="invoice">
+    <div class="invoice-header">
+      <h1>Invoice</h1>
+     
+      <img src="assets/ag-black.png" alt="Logo" width="100px">
+
+
+    </div>
+  
+    <div class="invoice-info">
+      <div class="info-block">
+        <h3>HOTEL-INFO</h3>
+      </div>
+    </div>
+  
+    <table class="invoice-table">
+      <thead>
+        <tr>
+          <th>Hotel Name</th>
+          <th>Branch Name</th>
+          <th>Hotel Address</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr >
+          <td>{{ invoiceData.hotelName }}</td>
+          <td>{{ invoiceData.branchName }}</td>
+          <td>{{ invoiceData.hotelAddress }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="invoice-info">
+      <div class="info-block">
+        <h3>CUSTOMER-INFO</h3>
+      </div>
+    </div>
+  
+    <table class="invoice-table">
+      <thead>
+        <tr>
+          <th>Customer Name</th>
+          <th>SSN</th>
+          <th>Customer Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ invoiceData.fullName }}</td>
+          <td>{{ invoiceData.sSN }}</td>
+          
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="invoice-info">
+      <div class="info-block">
+        <h3>INVOICE-INFO</h3>
+      </div>
+    </div>
+  
+    <table class="invoice-table">
+      <thead>
+        <tr>
+          <th>Invoice ID</th>
+          <th>Balance</th>
+          <th>Amount</th>
+          <th>Due Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ invoiceData.invoiceId }}</td>
+          <td>{{ invoiceData.balance }}</td>
+          <td>{{ invoiceData.billAmount }}</td>
+          <td>{{ invoiceData.dueDate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -2,11 +2,24 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-navigation',
-  standalone: true,
-  imports: [],
   templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.scss'
+  styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
 
+  constructor(
+  ){}
+
+  navigationList = [{
+    name:'hotel', link:'/hotel',icon:'hotel'
+  },{
+    name: 'customer', link: '/customer',icon:'people'
+  },
+  {
+    name: 'branch', link: '/branch',icon:'house'
+  }
+  ,{
+    name: 'invoice', link: '/invoice',icon:'receipt'
+  }
+]
 }

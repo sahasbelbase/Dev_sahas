@@ -1,0 +1,46 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+.mat-toolbar {
+    background-color: rgb(226, 123, 140);
+}
+.container {
+    width: 100%;
+    height: fit-content;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+  
+  .sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sidenav {
+    padding: 20px;
+  }
+  .custom-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff; /* White text color */
+  }
+  
+  .sidenav {
+    width: 250px;
+  }
+  
+  .navlink {
+    color: #000000; /* Black text color for navigation links */
+  }
+  
+  .icon {
+    color: #ffffff; /* White icon color */
+  }
+  
+  .heart {
+    color: red; /* Red color for the favorite icon */
+  }
+  
+  

@@ -1,1 +1,35 @@
-<p>hotel works!</p>
+<table class="table" border="1">
+  <thead>
+    <tr>
+      <th>Hotel ID</th>
+
+      <th>Name</th>
+      <th>PAN</th>
+      <th>Hotel Address</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of hotelData; let i=index;">
+      <td>{{item.hotelId}}</td>
+
+      <td>{{item.name}}</td>
+      <td>{{item.pan}}</td>
+      <td>{{item.hotelAddress}}</td>
+     <td>
+        <button mat-icon-button color="primary" (click)="edit(item, i)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="delete(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="button1">
+  <button mat-fab color="primary" (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

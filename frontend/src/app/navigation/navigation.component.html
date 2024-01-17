@@ -1,1 +1,27 @@
-<p>navigation works!</p>
+<mat-toolbar class="custom-toolbar" color="primary">
+  <button (click)="drawer.toggle()" mat-icon-button class="example-icon" >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="toolbar-title">HARS</span>
+  <span class="spacer"></span>
+  <button mat-icon-button class="heart">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <mat-list *ngFor="let item of navigationList">
+      <a routerLinkActive="mat-primary" [ngClass]="'navlink'" active routerLink="/{{ item.link }}" mat-button>
+        {{item.name}}
+        <mat-icon>{{item.icon}}</mat-icon>
+      </a>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

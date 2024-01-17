@@ -1,0 +1,15 @@
+.square-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 400px; /* Adjust the height as needed */
+    width: 400px; /* Set the width to match the desired height */
+    padding: 20px;
+  }
+
+  .square-form mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  

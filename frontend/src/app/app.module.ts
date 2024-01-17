@@ -3,14 +3,28 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HotelModule } from './hotel/hotel.module';
+import { CustomerModule } from './customer/customer.module';
+import { BranchModule } from './branch/branch.module';
+import { NavigationModule } from './navigation/navigation.module';
+import { InvoiceModule } from './invoice/invoice.module';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HotelModule,
+    CustomerModule,
+    BranchModule,
+    NavigationModule,
+    InvoiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
