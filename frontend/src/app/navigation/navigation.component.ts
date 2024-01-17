@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-navigation',
@@ -6,20 +7,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
+  @ViewChild('leftDrawer') leftDrawer!: MatDrawer;
+  @ViewChild('bottomDrawer') bottomDrawer!: MatDrawer;
 
-  constructor(
-  ){}
+  constructor() {}
 
-  navigationList = [{
-    name:'hotel', link:'/hotel',icon:'hotel'
-  },{
-    name: 'customer', link: '/customer',icon:'people'
-  },
-  {
-    name: 'branch', link: '/branch',icon:'house'
+  navigationList = [
+    { name: 'hotel', link: '/hotel', icon: 'hotel' },
+    { name: 'customer', link: '/customer', icon: 'people' },
+    { name: 'branch', link: '/branch', icon: 'house' },
+    { name: 'invoice', link: '/invoice', icon: 'receipt' }
+  ];
+
+  toggleLeftDrawer() {
+    this.leftDrawer.toggle();
   }
-  ,{
-    name: 'invoice', link: '/invoice',icon:'receipt'
+
+  toggleBottomDrawer() {
+    this.bottomDrawer.toggle();
   }
-]
 }

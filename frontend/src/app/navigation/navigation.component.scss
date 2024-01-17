@@ -1,46 +1,72 @@
 .spacer {
-    flex: 1 1 auto;
-  }
-.mat-toolbar {
-    background-color: rgb(226, 123, 140);
+  flex: 1 1 auto;
 }
+
+.mat-toolbar {
+  background-color: #2c3e50; /* Manly color for toolbar */
+}
+
 .container {
-    width: 100%;
-    height: fit-content;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-  }
-  
-  .sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .sidenav {
-    padding: 20px;
-  }
-  .custom-toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #ffffff; /* White text color */
-  }
-  
-  .sidenav {
-    width: 250px;
-  }
-  
-  .navlink {
-    color: #000000; /* Black text color for navigation links */
-  }
-  
-  .icon {
-    color: #ffffff; /* White icon color */
-  }
-  
-  .heart {
-    color: red; /* Red color for the favorite icon */
-  }
-  
-  
+  width: 100%;
+  height: fit-content;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidenav {
+  padding: 20px;
+  width: 250px; /* Initial width */
+}
+
+.custom-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff; /* White text color */
+}
+
+.sidenav {
+  width: 250px;
+  transition: width 0.3s; /* Smooth transition on width change */
+}
+
+.left-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+}
+
+.bottom-drawer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 250px; /* Adjust the height as needed */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.sidenav-expanded {
+  width: 300px; /* Expanded width on click */
+}
+
+.navlink {
+  color: #34495e; /* Manly color for navigation links */
+}
+
+.icon {
+  color: #ecf0f1; /* Light gray color for icons */
+}

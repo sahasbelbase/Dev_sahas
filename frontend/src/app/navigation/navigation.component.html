@@ -1,26 +1,39 @@
 <mat-toolbar class="custom-toolbar" color="primary">
-  <button (click)="drawer.toggle()" mat-icon-button class="example-icon" >
+  <button (click)="toggleLeftDrawer()" mat-icon-button class="example-icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span class="toolbar-title">HARS</span>
+  <span class="toolbar-title">Hotel Reservation System</span>
   <span class="spacer"></span>
-  <button mat-icon-button class="heart">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="icon">
-    <mat-icon>share</mat-icon>
-  </button>
 </mat-toolbar>
 
 <mat-drawer-container class="container" autosize>
-  <mat-drawer #drawer class="sidenav" mode="side">
+
+  <!-- Left Drawer -->
+  <mat-drawer #leftDrawer class="sidenav left-drawer" mode="side">
     <mat-list *ngFor="let item of navigationList">
       <a routerLinkActive="mat-primary" [ngClass]="'navlink'" active routerLink="/{{ item.link }}" mat-button>
         {{item.name}}
         <mat-icon>{{item.icon}}</mat-icon>
       </a>
     </mat-list>
+    <button (click)="toggleLeftDrawer()" mat-icon-button class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-drawer>
+
+  <!-- Bottom Drawer -->
+  <mat-drawer #bottomDrawer class="sidenav bottom-drawer" mode="over">
+    <mat-list *ngFor="let item of navigationList">
+      <a routerLinkActive="mat-primary" [ngClass]="'navlink'" active routerLink="/{{ item.link }}" mat-button>
+        {{item.name}}
+        <mat-icon>{{item.icon}}</mat-icon>
+      </a>
+    </mat-list>
+    <button (click)="toggleBottomDrawer()" mat-icon-button class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-drawer>
+
   <mat-drawer-content>
     <router-outlet></router-outlet>
   </mat-drawer-content>
