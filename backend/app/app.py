@@ -1,8 +1,18 @@
-from flask import Flask, jsonify, request
+
+from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Api
 from flask_cors import CORS
+
+app = Flask(__name__)
+app.config.from_pyfile('config.py')  
+
+CORS(app)
+ma = Marshmallow(app)
+api = Api(app)
+
+db = SQLAlchemy(app)
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -104,22 +114,6 @@ def create_branch():
 def branch():
     return jsonify(message='Branch Page')  # You can customize the JSON response
 
-# Your existing routes for rendering HTML pages
-@app.route('/hotel')
-def render_hotel():
-    return render_template('hotel.html')  # You need to create a hotel.html template
-
-@app.route('/customer')
-def render_customer():
-    return render_template('customer.html')  # You need to create a customer.html template
-
-@app.route('/branch')
-def render_branch():
-    return render_template('branch.html')  # You need to create a branch.html template
-
-@app.route('/invoice')
-def render_invoice():
-    return render_template('invoice.html')  # You need to create an invoice.html template
 
 if __name__ == '__main__':
     app.run(debug=True)
