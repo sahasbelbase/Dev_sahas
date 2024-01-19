@@ -1,3 +1,5 @@
+// src/app/branch/branch.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BranchFormComponent } from './branch-form/branch-form.component';
@@ -9,69 +11,47 @@ import { BranchService } from './branch.service';
   styleUrls: ['./branch.component.scss']
 })
 export class BranchComponent implements OnInit {
-  branchData: any;
-  hotelData: any;
-  typeData: any;
-  constructor(
-    public dialog: MatDialog,
-    public hs: BranchService
-  ) {}
+  branchData: any[] = [];
+
+  constructor(public dialog: MatDialog, public branchService: BranchService) {}
 
   ngOnInit(): void {
     this.getBranchData();
-    console.log('ngoninit');
-    this.branchData;
   }
 
   getBranchData(): void {
-    let json = {};
-    this.hs.GetBranchData(JSON.stringify(json)).subscribe(res => {
-      if (res) {
-        this.branchData = res.branchData;
-        this.hotelData = res.hotelData;
-        this.typeData = res.typeData;
-
-        // Map hotelName to branchData based on hotelId
-        // this.branchData.forEach((branch: any) => {
-        //   const matchingHotel = this.hotelData.find((hotel: any) => hotel.hotelId === branch.hotelId);
-        //   if (matchingHotel) {
-        //     branch.name = matchingHotel.name;
-        //   }
-        // });
-      }
+    this.branchService.getAllBranches().subscribe((data: any) => {
+      this.branchData = data;
     });
   }
 
   add(): void {
     const dialogRef = this.dialog.open(BranchFormComponent, {
       data: {
-        data: this.hotelData,
-        data1: this.typeData,
         action: 'submit'
-      }
+      } as any  // Resolve TypeScript error - Parameter 'data' implicitly has an 'any' type.
     });
 
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().subscribe((res: any) => {
       if (res) {
-        // res['branchId'] = this.branchData.length + 1;
-        // this.branchData.push(res);
         this.getBranchData();
       }
     });
   }
-  edit(item: any,index:number) {
-    const dialogRef = this.dialog.open(BranchFormComponent,{
+
+  edit(item: any, index: number): void {
+    const dialogRef = this.dialog.open(BranchFormComponent, {
       data: {
         data: item,
         action: 'edit'
-      }
+      } as any  // Resolve TypeScript error - Parameter 'data' implicitly has an 'any' type.
     });
-    dialogRef.afterClosed().subscribe(res => {
-      if(res) {
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res) {
         this.branchData[index] = res;
         this.getBranchData();
-    }
-    console.log('closed');
+      }
     });
   }
 }

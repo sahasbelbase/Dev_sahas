@@ -1,24 +1,24 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+// src/app/branch/branch.service.ts
+
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BranchService {
+  private baseUrl = 'http://localhost:5500/api/branches';
 
-  baseUrl = 'http://localhost:5500/api/Branch/';
-  constructor(
-    public http :HttpClient
-  ) { }
-  
+  constructor(private http: HttpClient) {}
 
-GetBranchData(branchData: string): Observable<any> {
-  const params = new HttpParams().set('json', '{}');
-  return this.http.get(this.baseUrl + 'Branch', { params});
-}
-BranchTsk(json:string): Observable<any>{
-  return this.http.post(this.baseUrl + 'BranchTsk', { json: json});
-}
+  // Define the method to fetch all branches
+  getAllBranches(): Observable<any> {
+    return this.http.get(this.baseUrl);
+  }
 
+  // Define the method for other branch-related tasks if needed
+  branchTask(json: string): Observable<any> {
+    return this.http.post(this.baseUrl, { json });
+  }
 }
