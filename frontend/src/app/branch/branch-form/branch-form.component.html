@@ -1,47 +1,43 @@
+<form (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Select Hotel ID</mat-label>
+    <mat-select [(ngModel)]="formData.hotelId" name="hotelId" required>
+      <!-- Populate this with available hotel IDs -->
+      <mat-option *ngFor="let hotel of hotelData" [value]="hotel.hotelId">
+        {{ hotel.name }} - {{ hotel.hotelId }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<form>
+  <mat-form-field>
+    <mat-label>Select Address Type ID</mat-label>
+    <mat-select [(ngModel)]="formData.addressTypeId" name="addressTypeId" required>
+      <!-- Populate this with available address type IDs -->
+      <mat-option *ngFor="let type of addressTypes" [value]="type.addressTypeId">
+        {{ type.type }} - {{ type.addressTypeId }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <div *ngIf="data.action.toLowerCase()=='submit'">
-        <div>
-            <mat-form-field appearance="fill">
-                <mat-label>Select Hotel</mat-label>
-                <mat-select [(ngModel)]="branchObject.hotelId"  name ="hotelId">
-                  <mat-option *ngFor="let item of hotelData"    value="{{item.hotelId }}">{{item.name}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field appearance="fill">
-                <mat-label>Select an option</mat-label>
-                <mat-select [(ngModel)]="branchObject.addressTypeId" name="addressTypeId">
-                    <mat-option *ngFor="let item of typeData" [value]="item.addressTypeId">{{item.type}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-      
-            <div>
-                <mat-form-field appearance="fill">
-                    <input [(ngModel)]="branchObject.country" matInput placeholder="country" name="country">
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field appearance="fill">
-                    <input [(ngModel)]="branchObject.city" matInput placeholder="city" name="city">
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field appearance="fill">
-                    <input [(ngModel)]="branchObject.streetName" matInput placeholder="streetName" name="streetName">
-                </mat-form-field>
-            </div>
-    </div>
-        <mat-form-field appearance="fill">
-            <input [(ngModel)]="branchObject.branchName" matInput placeholder="name " name = "branchName">
-        </mat-form-field>
-    <div>
-        <mat-form-field appearance="fill">
-            <input [(ngModel)]="branchObject.userPersonId" matInput placeholder="userPersonId " name = "userPersonId">
-        </mat-form-field>
-    </div>
-    <button type = "submit" (click) = "submit()" ><mat-icon>add</mat-icon></button>
+  <mat-form-field>
+    <mat-label>User Person ID</mat-label>
+    <input matInput [(ngModel)]="formData.userPersonId" name="userPersonId" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Country</mat-label>
+    <input matInput [(ngModel)]="formData.country" name="country" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>City</mat-label>
+    <input matInput [(ngModel)]="formData.city" name="city" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Street Name</mat-label>
+    <input matInput [(ngModel)]="formData.streetName" name="streetName" required>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
 </form>

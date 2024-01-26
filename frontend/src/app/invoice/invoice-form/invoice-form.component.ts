@@ -14,12 +14,8 @@ export class InvoiceFormComponent {
     public dialogRef: MatDialogRef<InvoiceFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public hs: InvoiceService
-  ) {}
-
-  ngOnInit(): void {
-    this.invoiceData = this.data.data;
-    // this.branchData = this.data.data1;
-    // this.customerData = this.data.data2;
+  ) {
+    this.invoiceData = data.invoiceData;
   }
 
   closeInvoice(): void {

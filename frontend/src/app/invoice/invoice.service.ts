@@ -1,4 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+// invoice.service.ts
+
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,19 +8,28 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InvoiceService {
+  baseUrl = 'http://localhost:5000';
 
-  baseUrl = 'http://localhost:5500/api/Invoice/';
-  constructor(
-    public http :HttpClient
-  ) { }
+  constructor(public http: HttpClient) {}
 
-  GetInvoiceData(invoiceData: string): Observable<any> {
-    const params = new HttpParams().set('json', '{}');
-    return this.http.get(this.baseUrl + 'Invoice', { params});
+  GetInvoiceData(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/invoices`);
   }
-  // invoiceTsk(json:string): Observable<any>{
-  //   return this.http.post(this.baseUrl + 'invoiceTsk', { json: json});
-  // }
-  
+
+  invoiceAction(json: string, action: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/invoices`, { json: json, action: action });
   }
-  
+
+  getCustomerName(customerId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getCustomerName/${customerId}`);
+  }
+
+  getBranchName(userPersonId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getBranchName/${userPersonId}`);
+  }
+
+  GetInvoicesWithDetails(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/invoices-with-details`);
+  }
+
+}

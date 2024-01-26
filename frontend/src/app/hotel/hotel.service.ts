@@ -1,4 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+// hotel.service.ts
+
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,20 +8,27 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HotelService {
+  baseUrl = 'http://localhost:5000'; // Update base URL
 
-  baseUrl = 'http://localhost:5500/api/Hotel/';
+  constructor(public http: HttpClient) {}
 
-  constructor(
-    public http :HttpClient
-  ) { }
-  
+  // Fetch hotel data
+  getHotelData(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/hotels`);
+  }
 
-GetHotelData(json: string): Observable<any> {
-  const params = new HttpParams().set('json', '{}');
-  return this.http.get(this.baseUrl + 'Hotel', { params});
-}
-HotelTsk(json:string): Observable<any>{
-  return this.http.post(this.baseUrl + 'HotelTsk', { json: json});
-}
+  // Fetch hotel data with address information
+  getHotelDataWithAddress(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/hotelsWithAddress`);
+  }
 
+  // Handle hotel task (create/update)
+  HotelTsk(json: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/hotels`, { json });
+  }
+
+  // Handle hotel address task (create/update)
+  HotelAddressTsk(json: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/hotelAddress`, { json });
+  }
 }

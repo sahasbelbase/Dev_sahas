@@ -1,56 +1,43 @@
-// src/app/branch/branch-form/branch-form.component.ts
-
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BranchService } from '../branch.service';
 
 @Component({
   selector: 'app-branch-form',
   templateUrl: './branch-form.component.html',
-  styleUrls: ['./branch-form.component.scss']
+  styleUrls: ['./branch-form.component.scss'],
 })
-export class BranchFormComponent implements OnInit {
-  branchObject = {
-    branchId: 0,
-    hotelId: 0,
-    addressTypeId: '',
-    name: '',
-    branchName: '',
-    country: '',
-    city: '',
-    streetName: '',
-    userPersonId: ''
-  };
-  typeData: any;
-  hotelData: any;
+export class BranchFormComponent {
+  formData: any = {}; // This should be replaced with an appropriate interface/model
 
-  constructor(
-    public dialogRef: MatDialogRef<BranchFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public hs: BranchService
-  ) {}
+  hotelData: any[] = []; // Replace 'any' with the actual type/interface for hotel data
+  addressTypes: any[] = []; // Replace 'any' with the actual type/interface for address type data
+
+  constructor(private branchService: BranchService) {}
 
   ngOnInit(): void {
-    if (this.data.action == 'edit') {
-      this.branchObject = { ...this.data.data };
-    }
-    this.typeData = this.data.data1;
-    this.hotelData = this.data.data;
+    // Fetch necessary data for dropdowns, e.g., hotelData, addressTypes
+    this.branchService.getHotels().subscribe((hotels) => {
+      this.hotelData = hotels;
+    });
+
+    this.branchService.getAddressTypes().subscribe((types) => {
+      this.addressTypes = types;
+    });
   }
 
-  submit(): void {
-    console.log('from submit');
-    console.log(this.branchObject);
-    let json = {
-      branchData: this.branchObject,
-      action: this.data.action
-    };
-    // Use the correct method name: branchTask
-    this.hs.branchTask(JSON.stringify(json)).subscribe((res: any) => {
-      if (res) {
-        this.dialogRef.close(res);
+  onSubmit() {
+    // Implement logic to submit the form data to the server
+    // Use this.formData to send the data to the server using your service methods
+    this.branchService.addBranch(this.formData).subscribe(
+      (response) => {
+        // Handle success response
+        console.log('Form submitted successfully:', response);
+      },
+      (error) => {
+        // Handle error response
+        console.error('Error submitting form:', error);
       }
-    });
-    // Note: You don't need to close the dialogRef here again; it's already closed in the subscribe callback.
+    );
   }
 }

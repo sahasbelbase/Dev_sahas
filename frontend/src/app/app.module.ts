@@ -9,6 +9,7 @@ import { CustomerModule } from './customer/customer.module';
 import { BranchModule } from './branch/branch.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { InvoiceModule } from './invoice/invoice.module';
+import { MatIconModule } from '@angular/material/icon'; // Add this import
 
 
 

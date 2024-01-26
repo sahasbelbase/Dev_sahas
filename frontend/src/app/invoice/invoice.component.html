@@ -1,18 +1,22 @@
+<!-- invoice.component.html -->
+
 <table class="table" border="1">
   <thead>
     <tr>
       <th>Customer Name</th>
       <th>Branch Name</th>
       <th>Amount</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of invoiceData">
+      <td>{{ item.customerName }}</td>
+      <td>{{ item.branchName }}</td>
+      <td>{{ item.billAmount }}</td>
       <td>
-        <button mat-button class="bold-button" (click)="display(item)">{{item.fullName}}</button>
+        <button mat-raised-button color="primary" (click)="display(item)">View Details</button>
       </td>
-      <td>{{item.branchName}}</td>
-      <td>{{item.billAmount}}</td>
     </tr>
   </tbody>
 </table>

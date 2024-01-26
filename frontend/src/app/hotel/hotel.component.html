@@ -1,8 +1,8 @@
+<!-- hotel.component.html -->
 <table class="table" border="1">
   <thead>
     <tr>
       <th>Hotel ID</th>
-
       <th>Name</th>
       <th>PAN</th>
       <th>Hotel Address</th>
@@ -11,12 +11,12 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of hotelData; let i=index;">
-      <td>{{item.hotelId}}</td>
-
-      <td>{{item.name}}</td>
-      <td>{{item.pan}}</td>
-      <td>{{item.hotelAddress}}</td>
-     <td>
+      <td>{{ item.hotelId }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.pan }}</td>
+      <td>{{ item.hotelAddress?.country }}, {{ item.hotelAddress?.city }}, {{ item.hotelAddress?.streetName }}
+      </td>
+      <td>
         <button mat-icon-button color="primary" (click)="edit(item, i)">
           <mat-icon>edit</mat-icon>
         </button>

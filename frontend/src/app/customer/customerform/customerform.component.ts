@@ -1,36 +1,46 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { customerService } from '../customer.service';
+import { CustomerService } from '../customer.service';
+
 @Component({
-  selector: 'app-customerform',
-  templateUrl: './customerform.component.html',
-  styleUrls: ['./customerform.component.scss']
+    selector: 'app-customerform',
+    templateUrl: './customerform.component.html',
+    styleUrls: ['./customerform.component.scss'],
+    providers: [CustomerService]
 })
-export class CustomerformComponent {
-  customerObject = {
-    personId: 0,
-    branchId: 0,
-    userPersonId: ''
-  }
-  branchData: any;
-  personData: any;
-  constructor(
-    public dialogRef: MatDialogRef<CustomerformComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public hs: customerService
-  ){}
-  ngOnInit():void{
-    this.branchData = this.data.data;
-    this.personData = this.data.data2;
-  }
-  submit(){
-    console.log('from submit')
-    console.log(this.customerObject)
-    this.hs.CustomerTsk(JSON.stringify(this.customerObject)).subscribe(res =>{
-      if(res) {
-        this.dialogRef.close(res);
-      }
-    });
-    this.dialogRef.close(this.customerObject)
-  }
+export class CustomerFormComponent {
+    customerObject = {
+        person: { personId: 0 }, // Add a default person structure
+        branchId: 0,
+        userPersonId: ''
+    };
+
+    branchData: any;
+    personData: any;
+
+    constructor(
+        public dialogRef: MatDialogRef<CustomerFormComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        public customerService: CustomerService
+    ) {}
+
+    ngOnInit(): void {
+        this.customerService.getPersonData().subscribe((res: any) => {
+            this.personData = res;
+        });
+
+        // Add the following line to fetch branch data
+        this.customerService.getBranches().subscribe((res: any) => {
+            this.branchData = res;
+        });
+    }
+
+    submit(): void {
+        console.log(this.customerObject); // Check if the object is populated correctly
+        this.customerService.createCustomer(this.customerObject).subscribe((res) => {
+            if (res) {
+                this.dialogRef.close(res);
+            }
+        });
+    }
 }

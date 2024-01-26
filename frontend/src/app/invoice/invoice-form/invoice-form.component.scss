@@ -1,56 +1,78 @@
+/* invoice-form.component.scss */
+
 .invoice-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px;
-    height: 600px;
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ddd;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 9999;
-  }
-  h1,h3{
-    font-weight: bold;
-  }
-  .invoice-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
+  font-family: 'Arial', sans-serif;
+}
 
-  .invoice-header h1 {
-    font-size: 24px;
-    margin: 0;
-  }
+.invoice {
+  width: 400px;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-  .invoice-close {
-    font-size: 24px;
-    cursor: pointer;
-  }
+.invoice-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-  .invoice-content {
-    height: calc(100% - 60px);
-    overflow-y: auto;
-  }
+.invoice-info {
+  margin-bottom: 20px;
+}
 
-  /* Additional styles for the invoice table */
-  .invoice-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
+.info-block {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
 
-  .invoice-table th,
-  .invoice-table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
+h3 {
+  color: #333;
+}
 
-  .invoice-table th {
-    background-color: #f5f5f5;
-    font-weight: bold;
-  }
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
+}
+
+/* Close button */
+.invoice-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #333;
+}
+
+.invoice-close:hover {
+  color: #ff0000;
+}
+
+.invoice-container {
+  overflow: auto;
+}
+.invoice-container {
+  height: 100vh; /* Set to 100% of the viewport height or adjust as needed */
+}
+.invoice-container {
+  z-index: 1;
+}

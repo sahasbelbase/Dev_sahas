@@ -1,33 +1,33 @@
-<table class="table" border="1">
-    <thead>
-      <tr>
-        <th>Hotel ID</th>
-        <th>Hotel Name</th>
-        <th>Branch ID</th>
-        <th>Branch Name</th>
-        <th>Branch Address</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of branchData; let i=index;">
-        <td>{{item.hotelId}}</td>
-        <td>{{item.name}}</td>
-        <td>{{item.branchId}}</td>
-        <td>{{item.branchName}}</td>
-        <td>{{item.branchAddress}}</td>
-        <td>
-          <button mat-icon-button color="primary" (click)="edit(item, i)">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <div class="button1">
-    <button mat-fab color="primary" (click)="add()">
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+<!-- branch.component.html -->
+<div>
+    <table class="table" border="1">
+      <thead>
+        <tr>
+          <th>Hotel ID</th>
+          <th>Branch Name</th>
+          <th>Branch ID</th>
+          <th>Branch Address</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of branchData; let i = index;">
+          <td>{{ item.hotelId }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.branchId }}</td>
+          <td>{{ item.branchAddress?.country }}, {{ item.branchAddress?.city }}, {{ item.branchAddress?.streetName }}</td>
+          <td>
+            <button mat-icon-button color="primary" (click)="edit(item, i)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="button1">
+        <button mat-fab color="primary" (click)="add()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
   

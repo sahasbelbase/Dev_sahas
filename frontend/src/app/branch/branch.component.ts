@@ -1,57 +1,79 @@
-// src/app/branch/branch.component.ts
-
+// branch.component.ts
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BranchFormComponent } from './branch-form/branch-form.component';
 import { BranchService } from './branch.service';
+import { Branch } from './branch.model';
+import { BranchFormComponent } from './branch-form/branch-form.component';
 
 @Component({
   selector: 'app-branch',
   templateUrl: './branch.component.html',
-  styleUrls: ['./branch.component.scss']
+  styleUrls: ['./branch.component.scss'],
 })
 export class BranchComponent implements OnInit {
-  branchData: any[] = [];
+  branchData: Branch[] = [];
+  hotelData: any[] = [];
+  typeData: any[] = [];
 
-  constructor(public dialog: MatDialog, public branchService: BranchService) {}
+  constructor(private branchService: BranchService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.getBranchData();
+    this.loadBranches();
   }
 
-  getBranchData(): void {
-    this.branchService.getAllBranches().subscribe((data: any) => {
-      this.branchData = data;
-    });
+  
+
+  loadBranches() {
+    this.branchService.getBranchesWithAddress().subscribe(
+      (branches) => {
+        this.branchData = branches;
+      },
+      (error) => {
+        console.error('Error loading branches:', error);
+      }
+    );
   }
 
   add(): void {
     const dialogRef = this.dialog.open(BranchFormComponent, {
       data: {
+        data: this.hotelData,
+        data1: this.typeData,
         action: 'submit'
-      } as any  // Resolve TypeScript error - Parameter 'data' implicitly has an 'any' type.
+      }
     });
 
-    dialogRef.afterClosed().subscribe((res: any) => {
+    dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.getBranchData();
       }
     });
   }
 
-  edit(item: any, index: number): void {
+  edit(item: any, index: number) {
     const dialogRef = this.dialog.open(BranchFormComponent, {
       data: {
         data: item,
         action: 'edit'
-      } as any  // Resolve TypeScript error - Parameter 'data' implicitly has an 'any' type.
+      }
     });
 
-    dialogRef.afterClosed().subscribe((res: any) => {
+    dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.branchData[index] = res;
         this.getBranchData();
       }
     });
+  }
+
+  private getBranchData() {
+    this.branchService.getBranchesWithAddress().subscribe(
+      (branches) => {
+        this.branchData = branches;
+      },
+      (error) => {
+        console.error('Error loading branches:', error);
+      }
+    );
   }
 }

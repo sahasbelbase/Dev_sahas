@@ -1,3 +1,5 @@
+// hotel.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { HotelFormComponent } from './hotel-form/hotel-form.component';
@@ -8,70 +10,62 @@ import { HotelService } from './hotel.service';
   templateUrl: './hotel.component.html',
   styleUrls: ['./hotel.component.scss']
 })
-export class HotelComponent implements OnInit { 
+export class HotelComponent implements OnInit {
   hotelData: any;
   typeData: any;
+
   constructor(
-    public dialog:MatDialog,
-    public hs:HotelService
-  ){ }
+    public dialog: MatDialog,
+    public hs: HotelService
+  ) {}
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.getHotelData();
-
-    console.log('ngoninit');
-    this.hotelData;
   }
-  getHotelData(){
-    let json = {};
-    this.hs.GetHotelData(JSON.stringify(json)).subscribe(res =>{
+
+  getHotelData(): void {
+    this.hs.getHotelDataWithAddress().subscribe(res => {
       if (res) {
-        this.hotelData = res.hotelData;
-        this.typeData = res.typeData
+        this.hotelData = res;
       }
     });
   }
+
   add(): void {
     const dialogRef = this.dialog.open(HotelFormComponent, {
       data: {
         data: this.typeData,
         action: 'submit'
       }
-      
     });
-//listens anything that is closed
+
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        console.log('response');
-        console.log(res);
-        // res['hotelID'] = this.hotelData.length +1;
-        // this.hotelData.push(res);
-        this.getHotelData();
-
+        this.hs.HotelTsk(JSON.stringify(res)).subscribe(result => {
+          console.log(result);
+          this.getHotelData();
+        });
       }
-      
-      console.log('closed');
     });
-    
   }
-  edit(item: any,index:number) {
-    const dialogRef = this.dialog.open(HotelFormComponent,{
+
+  edit(item: any, index: number): void {
+    const dialogRef = this.dialog.open(HotelFormComponent, {
       data: {
         data: item,
         action: 'edit'
       }
     });
+
     dialogRef.afterClosed().subscribe(res => {
-      if(res) {
+      if (res) {
         this.hotelData[index] = res;
         this.getHotelData();
-    }
-    console.log('closed');
+      }
     });
   }
-  delete(i:number): void{
 
-      this.hotelData.splice(i, 1)
-    }
-
+  delete(i: number): void {
+    this.hotelData.splice(i, 1);
   }
+}

@@ -1,47 +1,46 @@
+<!-- hotel-form.component.html -->
 <form class="square-form">
-    <div>
-        <mat-form-field appearance="fill">
-            <input [(ngModel)]="hotelObject.name" matInput placeholder="Hotel Name" name="name">
-        </mat-form-field>
-    </div>
-    <div *ngIf="data.action.toLowerCase()=='submit'">
-    <div>
-        <mat-form-field appearance="fill">
-           
+  <div>
+    <mat-form-field appearance="fill">
+      <input [(ngModel)]="hotelObject.name" matInput placeholder="Hotel Name" name="name">
+    </mat-form-field>
+  </div>
 
-            <mat-label>Select an option</mat-label>
-            <mat-select [(ngModel)]="hotelObject.addressTypeId" name="addressTypeId">
-                <mat-option *ngFor="let item of typeData" [value]="item.addressTypeId">{{item.type}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-  
-        <div>
-            <mat-form-field appearance="fill">
-                <input [(ngModel)]="hotelObject.country" matInput placeholder="country" name="country">
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field appearance="fill">
-                <input [(ngModel)]="hotelObject.city" matInput placeholder="city" name="city">
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field appearance="fill">
-                <input [(ngModel)]="hotelObject.streetName" matInput placeholder="streetName" name="streetName">
-            </mat-form-field>
-        </div>
-    </div>
+  <div *ngIf="data.action.toLowerCase()=='submit'">
+    <mat-form-field appearance="fill">
+      <mat-label>Select an option</mat-label>
+      <mat-select [(ngModel)]="hotelObject.addressTypeId" name="addressTypeId">
+        <mat-option *ngFor="let item of typeData" [value]="item.addressTypeId">{{item.type}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <div>
-        <mat-form-field appearance="fill">
-            <input [(ngModel)]="hotelObject.pan" matInput placeholder="Hotel Pan" name="pan">
-        </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input [(ngModel)]="hotelObject.country" matInput placeholder="Country" name="country">
+      </mat-form-field>
     </div>
     <div>
-        <mat-form-field appearance="fill">
-            <input [(ngModel)]="hotelObject.userPersonId" matInput placeholder="userPersonId" name="userPersonId">
-        </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input [(ngModel)]="hotelObject.city" matInput placeholder="City" name="city">
+      </mat-form-field>
     </div>
-    <button type="submit" (click)="submit()"><mat-icon>add</mat-icon></button>
+    <div>
+      <mat-form-field appearance="fill">
+        <input [(ngModel)]="hotelObject.streetName" matInput placeholder="Street Name" name="streetName">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill">
+      <input [(ngModel)]="hotelObject.pan" matInput placeholder="Hotel Pan" name="pan">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <input [(ngModel)]="hotelObject.userPersonId" matInput placeholder="User Person ID" name="userPersonId">
+    </mat-form-field>
+  </div>
+
+  <button type="submit" mat-button (click)="submit()">Submit</button>
 </form>

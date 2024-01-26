@@ -1,47 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CustomerformComponent } from './customerform/customerform.component';
-import { customerService } from './customer.service';
+import { CustomerFormComponent } from './customerform/customerform.component';
+import { CustomerService } from './customer.service';
 
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.scss']
+  styleUrls: ['./customer.component.scss'],
+  providers: [CustomerService] // Add this line
 })
-export class CustomerComponent implements OnInit{
+export class CustomerComponent implements OnInit {
   customerData: any;
-  branchData: any;
-  personData: any;
 
+  constructor(public dialog: MatDialog, public customerService: CustomerService) {}
 
-constructor(
-  public dialog:MatDialog,
-  public hs: customerService
-){}
-ngOnInit(): void{
-  this.getCustomerData();
-}
-getCustomerData():void{
-  this.hs.GetCustomerData(JSON.stringify(this.customerData)).subscribe(res =>{
-    if (res) {
-      this.customerData = res.customerData;
-      this.branchData = res.branchData;
-      this.personData = res.personData;
-    }
-  });
-}
-add():void{
-  const dialogRef = this.dialog.open(CustomerformComponent,{
-    data:{
-      data:this.branchData,
-      data2:this.personData,
-      mode:'add'
-    }
-  });
-  dialogRef.afterClosed().subscribe(res =>{
-    if(res) {
-     this.getCustomerData();
-    }
-  });
-}
+  ngOnInit(): void {
+    this.getCustomerData();
+  }
+
+  getCustomerData(): void {
+    this.customerService.getCustomers().subscribe((res) => {
+      if (res) {
+        this.customerData = res;
+      }
+    });
+  }
+
+  add(): void {
+    const dialogRef = this.dialog.open(CustomerFormComponent, {
+      data: {
+        data: this.customerData,
+        mode: 'add'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.getCustomerData();
+      }
+    });
+  }
 }

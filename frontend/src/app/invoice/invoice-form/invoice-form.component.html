@@ -1,84 +1,64 @@
-<div class="invoice-container" >
-    <span class="invoice-close" (click)="closeInvoice()">&times;</span>
-<div class="invoice">
-    <div class="invoice-header">
-      <h1>Invoice</h1>
-     
-      <img src="assets/ag-black.png" alt="Logo" width="100px">
+<!-- invoice-form.component.html -->
 
-
-    </div>
-  
+<div class="invoice-container">
+  <span class="invoice-close" (click)="closeInvoice()">&times;</span>
+  <div class="invoice">
     <div class="invoice-info">
       <div class="info-block">
         <h3>HOTEL-INFO</h3>
+        <div class="form-group">
+          <label for="hotelName">Hotel Name</label>
+          <input type="text" id="hotelName" [(ngModel)]="invoiceData.hotelName" name="hotelName" readonly>
+        </div>
+        <div class="form-group">
+          <label for="branchName">Branch Name</label>
+          <input type="text" id="branchName" [(ngModel)]="invoiceData.branchName" name="branchName" readonly>
+        </div>
+        <div class="form-group">
+          <label for="hotelAddress">Hotel Address</label>
+          <input type="text" id="hotelAddress" [(ngModel)]="invoiceData.hotelAddress" name="hotelAddress" readonly>
+        </div>
       </div>
     </div>
-  
-    <table class="invoice-table">
-      <thead>
-        <tr>
-          <th>Hotel Name</th>
-          <th>Branch Name</th>
-          <th>Hotel Address</th>
 
-        </tr>
-      </thead>
-      <tbody>
-        <tr >
-          <td>{{ invoiceData.hotelName }}</td>
-          <td>{{ invoiceData.branchName }}</td>
-          <td>{{ invoiceData.hotelAddress }}</td>
-        </tr>
-      </tbody>
-    </table>
-  
     <div class="invoice-info">
       <div class="info-block">
         <h3>CUSTOMER-INFO</h3>
+        <div class="form-group">
+          <label for="customerName">Customer Name</label>
+          <input type="text" id="customerName" [(ngModel)]="invoiceData.customerName" name="customerName" readonly>
+        </div>
+        <div class="form-group">
+          <label for="ssn">SSN</label>
+          <input type="text" id="ssn" [(ngModel)]="invoiceData.ssn" name="ssn" readonly>
+        </div>
+        <div class="form-group">
+          <label for="customerAddress">Customer Address</label>
+          <input type="text" id="customerAddress" [(ngModel)]="invoiceData.customerAddress" name="customerAddress" readonly>
+        </div>
       </div>
     </div>
-  
-    <table class="invoice-table">
-      <thead>
-        <tr>
-          <th>Customer Name</th>
-          <th>SSN</th>
-          <th>Customer Address</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ invoiceData.fullName }}</td>
-          <td>{{ invoiceData.sSN }}</td>
-          
-        </tr>
-      </tbody>
-    </table>
-  
+
     <div class="invoice-info">
       <div class="info-block">
         <h3>INVOICE-INFO</h3>
+        <div class="form-group">
+          <label for="invoiceId">Invoice ID</label>
+          <input type="text" id="invoiceId" [(ngModel)]="invoiceData.invoiceId" name="invoiceId" readonly>
+        </div>
+        <div class="form-group">
+          <label for="balance">Balance</label>
+          <input type="text" id="balance" [(ngModel)]="invoiceData.balance" name="balance" readonly>
+        </div>
+        <div class="form-group">
+          <label for="billAmount">Amount</label>
+          <input type="text" id="billAmount" [(ngModel)]="invoiceData.billAmount" name="billAmount" readonly>
+        </div>
+        <div class="form-group">
+          <label for="dueDate">Due Date</label>
+          <input type="text" id="dueDate" [(ngModel)]="invoiceData.dueDate" name="dueDate" readonly>
+        </div>
       </div>
     </div>
-  
-    <table class="invoice-table">
-      <thead>
-        <tr>
-          <th>Invoice ID</th>
-          <th>Balance</th>
-          <th>Amount</th>
-          <th>Due Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ invoiceData.invoiceId }}</td>
-          <td>{{ invoiceData.balance }}</td>
-          <td>{{ invoiceData.billAmount }}</td>
-          <td>{{ invoiceData.dueDate }}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>
