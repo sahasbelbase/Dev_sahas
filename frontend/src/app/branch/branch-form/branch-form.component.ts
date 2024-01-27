@@ -8,10 +8,10 @@ import { BranchService } from '../branch.service';
   styleUrls: ['./branch-form.component.scss'],
 })
 export class BranchFormComponent {
-  formData: any = {}; // This should be replaced with an appropriate interface/model
+  formData: any = {}; 
 
-  hotelData: any[] = []; // Replace 'any' with the actual type/interface for hotel data
-  addressTypes: any[] = []; // Replace 'any' with the actual type/interface for address type data
+  hotelData: any[] = []; 
+  addressTypes: any[] = []; 
 
   constructor(private branchService: BranchService) {}
 
@@ -28,14 +28,14 @@ export class BranchFormComponent {
 
   onSubmit() {
     // Implement logic to submit the form data to the server
-    // Use this.formData to send the data to the server using your service methods
+    
     this.branchService.addBranch(this.formData).subscribe(
       (response) => {
-        // Handle success response
+        
         console.log('Form submitted successfully:', response);
       },
       (error) => {
-        // Handle error response
+        
         console.error('Error submitting form:', error);
       }
     );

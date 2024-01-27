@@ -1,5 +1,3 @@
-// hotel-form.component.ts
-
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HotelService } from '../hotel.service';
@@ -43,7 +41,7 @@ export class HotelFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('Type Data:', this.typeData);  // Debug statement
+    console.log('Type Data:', this.typeData); 
     if (this.data.action === 'edit') {
       this.hotelObject = { ...this.data.data };
     }

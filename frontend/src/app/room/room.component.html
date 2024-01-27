@@ -1,0 +1,18 @@
+<div class="room-availability-container">
+    <h2>Room Availability</h2>
+    <table class="table" border="1">
+      <thead>
+        <tr>
+          <th>Room Number</th>
+          <th>Availability</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let room of roomAvailability">
+          <td>{{ room.roomNumber }}</td>
+          <td>{{ room.availability }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

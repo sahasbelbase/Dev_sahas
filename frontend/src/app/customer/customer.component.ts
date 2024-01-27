@@ -7,7 +7,7 @@ import { CustomerService } from './customer.service';
   selector: 'app-customer',
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss'],
-  providers: [CustomerService] // Add this line
+  providers: [CustomerService] 
 })
 export class CustomerComponent implements OnInit {
   customerData: any;

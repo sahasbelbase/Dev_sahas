@@ -16,7 +16,8 @@ export class NavigationComponent {
     { name: 'hotel', link: '/hotel', icon: 'hotel' },
     { name: 'customer', link: '/customer', icon: 'people' },
     { name: 'branch', link: '/branch', icon: 'house' },
-    { name: 'invoice', link: '/invoice', icon: 'receipt' }
+    { name: 'invoice', link: '/invoice', icon: 'receipt' },
+    { name: 'room', link: '/room', icon: 'meeting_room' } // Assuming 'meeting_room' is the MatIcon for room
   ];
 
   toggleLeftDrawer() {

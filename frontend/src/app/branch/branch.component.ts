@@ -1,4 +1,3 @@
-// branch.component.ts
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BranchService } from './branch.service';

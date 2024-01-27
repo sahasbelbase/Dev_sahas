@@ -1,4 +1,3 @@
-// branch.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -24,7 +23,7 @@ export class BranchService {
     return this.http.post<any>(`${this.baseUrl}/addBranch`, formData);
   }
 
-  // Add the missing method
+ 
   getBranchesWithAddress(): Observable<Branch[]> {
     return this.http.get<Branch[]>(`${this.baseUrl}/branches`);
   }

@@ -10,7 +10,7 @@ import { CustomerService } from '../customer.service';
 })
 export class CustomerFormComponent {
     customerObject = {
-        person: { personId: 0 }, // Add a default person structure
+        person: { personId: 0 },
         branchId: 0,
         userPersonId: ''
     };
@@ -29,14 +29,14 @@ export class CustomerFormComponent {
             this.personData = res;
         });
 
-        // Add the following line to fetch branch data
+        
         this.customerService.getBranches().subscribe((res: any) => {
             this.branchData = res;
         });
     }
 
     submit(): void {
-        console.log(this.customerObject); // Check if the object is populated correctly
+        console.log(this.customerObject);
         this.customerService.createCustomer(this.customerObject).subscribe((res) => {
             if (res) {
                 this.dialogRef.close(res);

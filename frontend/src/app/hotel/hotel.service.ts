@@ -1,5 +1,3 @@
-// hotel.service.ts
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -8,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HotelService {
-  baseUrl = 'http://localhost:5000'; // Update base URL
+  baseUrl = 'http://localhost:5000'; 
 
   constructor(public http: HttpClient) {}
 

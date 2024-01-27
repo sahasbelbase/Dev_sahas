@@ -1,4 +1,3 @@
-// branch.model.ts
 export interface Branch {
     hotelId: number;
     name: string;
