@@ -2,15 +2,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
 from flask_marshmallow import Marshmallow
+from flask_mysqldb import MySQL
+from flask_cors import CORS
 from models import db, person, hotel, branch, customer, addressType, address, personAddress, branchAddress, hotelAddress, contactType, contactInformation, personContact, hotelContact, branchContact, roomType, room, booking, serviceType, food, facility, invoice, transaction, payment
-
 from serializers import personSchema, hotelSchema, branchSchema, customerSchema, addressTypeSchema, addressSchema, \
     personAddressSchema, hotelAddressSchema, branchAddressSchema, contactTypeSchema, contactInformationSchema, \
     personContactSchema, hotelContactSchema, branchContactSchema, roomTypeSchema, roomSchema, bookingSchema, \
     serviceTypeSchema, foodSchema, facilitySchema, invoiceSchema, transactionSchema, paymentSchema
-from flask_mysqldb import MySQL
-from flask_cors import CORS
-
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -27,11 +25,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/hrs'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize SQLAlchemy and Marshmallow
-
-ma = Marshmallow(app)
+db.init_app(app)
 
 # Link SQLAlchemy to Flask app
-db.init_app(app)
+ma = Marshmallow(app)
 
 
 # Initialize schema objects
@@ -338,11 +335,6 @@ def get_all_customers_with_address():
     
     return jsonify(result)
 
-
-
-
-
-
 # Route to get all contact types
 @app.route('/contactTypes', methods=['GET'])
 def getAllContactTypes():
@@ -367,16 +359,6 @@ def getAllHotelContacts():
     hotelContacts = hotelContact.query.all()
     return jsonify(hotelContactSchema.dump(hotelContacts, many=True)), 200
 
-# Route to create a new room
-@app.route('/rooms', methods=['POST'])
-def createRoom():
-    data = request.json
-    newRoom = room(roomTypeID=data['roomTypeID'], branchId=data['branchId'],
-                    roomNumber=data['roomNumber'], price=data['price'], userPersonId=data['userPersonId'])
-    db.session.add(newRoom)
-    db.session.commit()
-    return jsonify(roomSchema.dump(newRoom)), 201
-
 # Route to get all room types
 @app.route('/roomTypes', methods=['GET'])
 def getAllRoomTypes():
@@ -384,11 +366,45 @@ def getAllRoomTypes():
     return jsonify(roomTypeSchema.dump(roomTypes, many=True)), 200
 
 
+@app.route('/rooms', methods=['POST'])
+def createRoom():
+    data = request.json
+    newRoom = room(
+        roomTypeID=data['roomTypeID'],
+        branchId=data['branchId'],
+        roomNumber=data['roomNumber'],
+        price=data['price'],
+        userPersonId=data['userPersonId'],
+        isAvailable=True  # By default, a new room is available
+    )
+    db.session.add(newRoom)
+    db.session.commit()
+    return jsonify(roomSchema.dump(newRoom)), 201
+
 # Route to get all rooms
 @app.route('/rooms', methods=['GET'])
 def getAllRooms():
     rooms = room.query.all()
-    return jsonify(roomSchema.dump(rooms, many=True)), 200
+    result = roomSchema.dump(rooms, many=True)
+    return jsonify(result), 200
+
+# Endpoint to fetch room availability
+@app.route('/room_availability', methods=['GET'])
+def get_room_availability():
+    try:
+        rooms = room.query.all()
+        room_availability = []
+        for room_obj in rooms:  # Rename the loop variable to avoid conflict
+            room_data = {
+                'roomNumber': room_obj.roomNumber,
+                'roomTypeID': room_obj.roomTypeID,
+                'isAvailable': room_obj.isAvailable
+            }
+            room_availability.append(room_data)
+        return jsonify(room_availability)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 # Route to create a new booking
 @app.route('/bookings', methods=['POST'])
@@ -492,6 +508,7 @@ def getAllTransactions():
     return jsonify(transactionSchema.dump(transactions, many=True)), 200
 
 # Route to create a new transaction
+
 @app.route('/transactions', methods=['POST'])
 def createTransaction():
     data = request.json

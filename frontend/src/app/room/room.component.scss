@@ -1,24 +1,35 @@
 .room-availability-container {
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-  
-    table {
-      width: 100%;
-      border-collapse: collapse;
-  
-      th, td {
-        padding: 10px;
-        text-align: left;
-      }
-  
-      th {
-        background-color: #f2f2f2;
-      }
-  
-      tr:nth-child(even) {
-        background-color: #f9f9f9;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    button {
+      background-color: #8c4fe6; // Set the button color to blue
+      color: #fff; // Set the text color to white
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #4a30cd; // Darker shade of blue on hover
       }
     }
   }
-  
+}

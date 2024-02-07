@@ -4,7 +4,8 @@ import { HotelComponent } from './hotel/hotel.component';
 import { CustomerComponent } from './customer/customer.component';
 import { BranchComponent } from './branch/branch.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { RoomComponent } from './room/room.component'; // Import the RoomComponent
+import { RoomComponent } from './room/room.component'; 
+import { BookingComponent } from './booking/booking.component';
 
 const routes: Routes = [
   { path: 'hotel', component: HotelComponent },
@@ -12,7 +13,9 @@ const routes: Routes = [
   { path: 'customer', component: CustomerComponent },
   { path: 'branch', component: BranchComponent },
   { path: 'invoice', component: InvoiceComponent },
-  { path: 'room', component: RoomComponent } // Add the route for the RoomComponent
+  { path: 'room', component: RoomComponent },
+  {path: 'booking', component: BookingComponent}
+  
 ];
 
 @NgModule({

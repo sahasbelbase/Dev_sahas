@@ -1,18 +1,23 @@
 <div class="room-availability-container">
-    <h2>Room Availability</h2>
-    <table class="table" border="1">
-      <thead>
-        <tr>
-          <th>Room Number</th>
-          <th>Availability</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let room of roomAvailability">
-          <td>{{ room.roomNumber }}</td>
-          <td>{{ room.availability }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <h2>Room Availability</h2>
+  <table class="table" border="1">
+    <thead>
+      <tr>
+        <th>Room Number</th>
+        <th>Room Type</th>
+        <th>Availability</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let room of roomAvailability">
+        <td>{{ room.roomNumber }}</td>
+        <td>{{ getRoomTypeName(room.roomTypeID) }}</td>
+        <td>{{ room.isAvailable }}</td>  
+        <td>
+          <button (click)="bookRoom(room.roomId)">Book Room</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

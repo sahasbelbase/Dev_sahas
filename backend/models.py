@@ -21,7 +21,6 @@ class user(db.Model):
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
     userPersonID = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=False)
-
     person = db.relationship('person', foreign_keys=[personId])
     branch = db.relationship('branch', foreign_keys=[branchId])
     userPerson = db.relationship('person', foreign_keys=[userPersonID])
@@ -62,7 +61,6 @@ class hotel(db.Model):
     pan = db.Column(db.String(10), unique=True, nullable=False)
     userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'))
     person = db.relationship('person', foreign_keys=[userPersonId])
-    # Update the backref name to 'hotel_address'
     hotelAddress = db.relationship('hotelAddress', backref='hotel_address', uselist=False)
  
 class branch(db.Model):
@@ -79,16 +77,10 @@ class customer(db.Model):
     personId = db.Column(db.Integer, db.ForeignKey('person.personId'), primary_key=True, nullable=False)
     branchId = db.Column(db.Integer, db.ForeignKey('branch.branchId'), nullable=False)
     userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=False)
-    insertDate = db.Column(db.SmallInteger, default=db.func.current_timestamp())
-
-    # Add the following line to load related person information
+    insertDate = db.Column(db.SmallInteger, default=db.func.current_timestamp())    
     person = db.relationship('person', foreign_keys=[personId])
-
     branch = db.relationship('branch', foreign_keys=[branchId])
     userPerson = db.relationship('person', foreign_keys=[userPersonId])
-
-
-
 
 class personAddress(db.Model):
     __tablename__ = 'personAddress'
@@ -101,7 +93,6 @@ class personAddress(db.Model):
     address = db.relationship('address', foreign_keys=[addressId])
     userPerson = db.relationship('person', foreign_keys=[userPersonID])
 
-
 class branchAddress(db.Model):
     __tablename__ = 'branchAddress'
     branchAddressId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -111,9 +102,7 @@ class branchAddress(db.Model):
     userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=False)
     branch = db.relationship('branch', foreign_keys=[branchId])
     address = db.relationship('address', foreign_keys=[addressId])
-    userPerson = db.relationship('person', foreign_keys=[userPersonId])
-
-    
+    userPerson = db.relationship('person', foreign_keys=[userPersonId])    
     
 class contactType(db.Model):
     __tablename__ = 'contactType'
@@ -122,8 +111,6 @@ class contactType(db.Model):
     insertDate = db.Column(db.SmallInteger, default=db.func.current_timestamp())
     userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=False)
     person = db.relationship('person', foreign_keys=[userPersonId])
-
-
 class contactInformation(db.Model):
     __tablename__ = 'contactInformation'
     contactInformationId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -133,7 +120,6 @@ class contactInformation(db.Model):
     userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=False)
     contactType = db.relationship('contactType', foreign_keys=[contactTypeId])
     person = db.relationship('person', foreign_keys=[userPersonId])
-
 class personContact(db.Model):
     __tablename__ = 'personContact'
     personContactId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -144,10 +130,6 @@ class personContact(db.Model):
     person = db.relationship('person', foreign_keys=[personId])
     contactInfo = db.relationship('contactInformation', foreign_keys=[contactInformationId])
     userPerson = db.relationship('person', foreign_keys=[userPersonId])
-
-
-
-# Define HotelContact model
 class hotelContact(db.Model):
     __tablename__ = 'hotelContact'
     hotelContactId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -158,7 +140,6 @@ class hotelContact(db.Model):
     hotel = db.relationship('hotel', foreign_keys=[hotelId])
     contactInfo = db.relationship('contactInformation', foreign_keys=[contactInformationId])
     userPerson = db.relationship('person', foreign_keys=[userPersonId])
-
 class branchContact(db.Model):
     __tablename__ = 'branchContact'
     branchContactId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -169,15 +150,13 @@ class branchContact(db.Model):
     branch = db.relationship('branch', foreign_keys=[branchId])
     contactInfo = db.relationship('contactInformation', foreign_keys=[contactInformationId])
     userPerson = db.relationship('person', foreign_keys=[userPersonId])
-
 class roomType(db.Model):
     __tablename__ = 'roomType'
     roomTypeId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     roomType = db.Column(db.String(200), nullable=False)
     insertDate = db.Column(db.SmallInteger, default=db.func.current_timestamp())
-    userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=False)
+    userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=True)
     person = db.relationship('person', foreign_keys=[userPersonId])
-
 class room(db.Model):
     __tablename__ = 'room'
     roomId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -186,25 +165,24 @@ class room(db.Model):
     roomNumber = db.Column(db.String(50), nullable=False)
     price = db.Column(db.Float, nullable=False)
     insertDate = db.Column(db.SmallInteger, default=db.func.current_timestamp())
-    userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=False)
+    userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=True)
+    isAvailable = db.Column(db.String(10), nullable=False, default='Available')  # Updated field for availability
     roomType = db.relationship('roomType', foreign_keys=[roomTypeID])
     branch = db.relationship('branch', foreign_keys=[branchId])
     userPerson = db.relationship('person', foreign_keys=[userPersonId])
-
 
 class booking(db.Model):
     __tablename__ = 'booking'
     bookingId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     roomId = db.Column(db.Integer, db.ForeignKey('room.roomId'), nullable=False)
-    customerId = db.Column(db.Integer, db.ForeignKey('customer.personId'), nullable=False)
+    customerId = db.Column(db.Integer, db.ForeignKey('customer.personId'), nullable=True)
     checkInDate = db.Column(db.Date, nullable=False)
     checkOutDate = db.Column(db.Date, nullable=False)
     insertDate = db.Column(db.SmallInteger, default=db.func.current_timestamp())
-    userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=False)
+    userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=True)
     room = db.relationship('room', foreign_keys=[roomId])
     customer = db.relationship('customer', foreign_keys=[customerId])
     userPerson = db.relationship('person', foreign_keys=[userPersonId])
-
 class serviceType(db.Model):
     __tablename__ = 'serviceType'
     serviceTypeId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -212,7 +190,6 @@ class serviceType(db.Model):
     insertDate = db.Column(db.SmallInteger, default=db.func.current_timestamp())
     userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=False)
     person = db.relationship('person', foreign_keys=[userPersonId])
-
 class food(db.Model):
     __tablename__ = 'food'
     foodId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -224,7 +201,6 @@ class food(db.Model):
     branch = db.relationship('branch', foreign_keys=[branchID])
     userPerson = db.relationship('person', foreign_keys=[userPersonId])
 
-
 class facility(db.Model):
     __tablename__ = 'facility'
     facilityId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -235,7 +211,6 @@ class facility(db.Model):
     userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=False)
     branch = db.relationship('branch', foreign_keys=[branchID])
     userPerson = db.relationship('person', foreign_keys=[userPersonId])
-
 class invoice(db.Model):
     __tablename__ = 'invoice'
     invoiceId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -247,7 +222,7 @@ class invoice(db.Model):
     userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=False)
     customer = db.relationship('customer', foreign_keys=[customerId])
     userPerson = db.relationship('person', foreign_keys=[userPersonId])
-    
+ 
 class transaction(db.Model):
     transactionId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     roomId = db.Column(db.Integer, db.ForeignKey('room.roomId'), nullable=False)
@@ -259,7 +234,6 @@ class transaction(db.Model):
     invoiceID = db.Column(db.Integer, db.ForeignKey('invoice.invoiceId'))
     insertDate = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     userPersonId = db.Column(db.Integer, db.ForeignKey('person.personId'), nullable=False)  # Add ForeignKey here
-
     room = db.relationship('room', foreign_keys=[roomId])
     customer = db.relationship('customer', foreign_keys=[customerId])
     user = db.relationship('person', foreign_keys=[userPersonId])

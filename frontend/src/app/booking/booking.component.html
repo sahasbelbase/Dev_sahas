@@ -1,0 +1,25 @@
+<div class="booking-container">
+    <h2>Book a Room</h2>
+    <p>Room ID: {{ roomId }}</p>
+    <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+      <label for="customerId">Customer Name:</label>
+      <select formControlName="customerId" id="customerId">
+        <option *ngFor="let customer of customers" [value]="customer.personId">{{ customer.fullName }}</option>
+      </select>
+      <br>
+      <label for="checkInDate">Check-In Date:</label>
+      <input type="date" formControlName="checkInDate" id="checkInDate">
+      <br>
+      <label for="checkOutDate">Check-Out Date:</label>
+      <input type="date" formControlName="checkOutDate" id="checkOutDate">
+      <br>
+      <label for="price">Price:</label>
+      <input type="text" formControlName="price" id="price">
+      <br>
+      <label for="days">Days:</label>
+      <input type="text" formControlName="days" id="days">
+      <br>
+      <button type="submit" [disabled]="!bookingForm.valid">Book Now</button>
+    </form>
+  </div>
+  

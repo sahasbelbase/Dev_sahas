@@ -160,6 +160,7 @@ class roomSchema(Schema):
     price = fields.Float(required=True)
     insertDate = fields.DateTime()
     userPersonId = fields.Int(required=True)
+    isAvailable = fields.Bool(required=True) 
 
 class bookingSchema(Schema):
     class Meta:
