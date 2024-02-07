@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BookingService {
-  private baseUrl = 'http://localhost:5000'; // Update with your API base URL
+  private baseUrl = 'http://localhost:5000'; 
 
   constructor(private http: HttpClient) { }
 
@@ -16,5 +16,10 @@ export class BookingService {
 
   createBooking(bookingData: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/bookings`, bookingData);
+  }
+
+  // Add the method to fetch room availability
+  getRoomAvailability(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/room_availability`);
   }
 }

@@ -14,8 +14,7 @@ const routes: Routes = [
   { path: 'branch', component: BranchComponent },
   { path: 'invoice', component: InvoiceComponent },
   { path: 'room', component: RoomComponent },
-  {path: 'booking', component: BookingComponent}
-  
+  { path: 'booking/:roomId', component: BookingComponent } // Include the roomId parameter
 ];
 
 @NgModule({

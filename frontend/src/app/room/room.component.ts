@@ -41,6 +41,6 @@ export class RoomComponent implements OnInit {
 
   bookRoom(roomId: number) {
     console.log('Booking room with ID:', roomId);
-    this.router.navigate(['/booking'], { queryParams: { roomId: roomId } });
+    this.router.navigate(['/booking', roomId]); // Pass roomId as a route parameter
   }
 }

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BookingComponent } from './booking.component';
-import { BookingService } from './booking.service'; // Import the service
+import { BookingService } from './booking.service'; 
 
 @NgModule({
   declarations: [
@@ -15,6 +15,6 @@ import { BookingService } from './booking.service'; // Import the service
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [BookingService] // Provide the service here
+  providers: [BookingService] 
 })
 export class BookingModule { }

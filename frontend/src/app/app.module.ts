@@ -13,7 +13,7 @@ import { NavigationModule } from './navigation/navigation.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { FormsModule } from '@angular/forms'; 
 import { RoomModule } from './room/room.module';
 import { BookingModule } from './booking/booking.module';
 
@@ -34,7 +34,7 @@ import { BookingModule } from './booking/booking.module';
     InvoiceModule,
     RoomModule,
     BookingModule,
-    RouterModule.forRoot([]), // Import and configure RouterModule
+    RouterModule.forRoot([]), 
     MatIconModule,
     ReactiveFormsModule,
     FormsModule,
