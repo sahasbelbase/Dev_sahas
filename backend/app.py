@@ -4,6 +4,7 @@ from flask_restful import Api, Resource
 from flask_marshmallow import Marshmallow
 from flask_mysqldb import MySQL
 from flask_cors import CORS
+from datetime import datetime
 from models import db, person, hotel, branch, customer, addressType, address, personAddress, branchAddress, hotelAddress, contactType, contactInformation, personContact, hotelContact, branchContact, roomType, room, booking, serviceType, food, facility, invoice, transaction, payment
 from serializers import personSchema, hotelSchema, branchSchema, customerSchema, addressTypeSchema, addressSchema, \
     personAddressSchema, hotelAddressSchema, branchAddressSchema, contactTypeSchema, contactInformationSchema, \
@@ -297,16 +298,11 @@ def create_customer():
         # Create a new person
         new_person = person(fullName=person_data['fullName'], SSN=person_data.get('ssn'), Title=person_data.get('title'))
         db.session.add(new_person)
-        db.session.commit()
-
-        # Use the newly created person to associate with the new customer
+        db.session.commit()        
         data['person'] = new_person
-
-        # Create a new customer
         new_customer = customer(**data)
         db.session.add(new_customer)
         db.session.commit()
-
         return customerSchema.jsonify(new_customer), 201
 
     except Exception as e:
@@ -406,17 +402,76 @@ def get_room_availability():
         return jsonify({'error': str(e)}), 500
 
 
-# Route to create a new booking
+# Route to create a new booking or perform bookingTsk action
 @app.route('/bookings', methods=['POST'])
 def createBooking():
-    data = request.json
-    newBooking = booking(roomId=data['roomId'], customerId=data['customerId'],
-                          checkInDate=data['checkInDate'], checkOutDate=data['checkOutDate'],
-                          userPersonId=data['userPersonId'])
-    db.session.add(newBooking)
-    db.session.commit()
-    return jsonify(bookingSchema.dump(newBooking)), 201
+    try:
+        data = request.json
 
+        if 'action' in data and data['action'] == 'bookingTsk':
+            # Handle bookingTsk logic here
+            # Extract and process JSON data as needed
+            # ...
+
+            return jsonify({"success": True, "message": "bookingTsk processed"}), 200
+
+        # If no 'action' specified or 'action' is not 'bookingTsk', create a new booking
+        new_booking = booking(
+            roomId=data['roomId'],
+            customerId=data['customerId'],
+            checkInDate=data['checkInDate'],
+            checkOutDate=data['checkOutDate'],
+            userPersonId=data['userPersonId']
+        )
+
+        db.session.add(new_booking)
+        db.session.commit()
+
+        # Assuming you have a method to generate an invoice or booking confirmation
+        invoice_result = generate_invoice(new_booking)
+
+        return jsonify({
+            "success": True,
+            "message": "Booking created successfully",
+            "booking": bookingSchema.dump(new_booking),
+            "invoice_result": invoice_result
+        }), 201
+
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+def generate_invoice(new_booking):
+    try:
+        # Calculate the duration of the stay
+        duration = (new_booking.checkOutDate - new_booking.checkInDate).days
+        
+        # Calculate the bill amount based on room price and duration of stay
+        room_price = new_booking.room.price
+        bill_amount = room_price * duration
+        
+        # Set due date to be a week after the check-out date
+        due_date = new_booking.checkOutDate + timedelta(days=7)
+        
+        # Set the initial balance to be equal to the bill amount
+        balance = bill_amount
+        
+        # Create a new invoice entry in the database
+        new_invoice = invoice(
+            customerId=new_booking.customerId,
+            dueDate=due_date,
+            billAmount=bill_amount,
+            balance=balance,
+            userPersonId=new_booking.userPersonId
+        )
+        
+        db.session.add(new_invoice)
+        db.session.commit()
+        
+        return invoiceSchema.dump(new_invoice)
+
+    except Exception as e:
+        print(f"Error generating invoice: {str(e)}")
+        return None
 
 # Route to create a new service type
 @app.route('/serviceTypes', methods=['POST'])
@@ -495,10 +550,19 @@ def create_or_update_invoice():
         db.session.add(new_invoice)
         db.session.commit()
 
-        return jsonify(invoiceSchema.dump(new_invoice)), 201
+        # Assuming you have a method to generate an invoice or booking confirmation
+        invoice_result = generate_invoice(new_invoice)
+
+        return jsonify({
+            "success": True,
+            "message": "Invoice created successfully",
+            "invoice": invoiceSchema.dump(new_invoice),
+            "invoice_result": invoice_result
+        }), 201
 
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
 
 
 # Route to get all transactions

@@ -23,8 +23,8 @@ export class BookingComponent implements OnInit {
       customerId: ['', Validators.required],
       checkInDate: ['', Validators.required],
       checkOutDate: ['', Validators.required],
-      price: [''],
-      days: ['']
+      price: [''], // No need for the price field here
+      days: [''] // No need for the days field here
     });
   }
 
@@ -37,12 +37,11 @@ export class BookingComponent implements OnInit {
   loadCustomers() {
     this.bookingService.getCustomers().subscribe((data: any) => {
       this.customers = data;
-    }, (error: any) => { // Explicitly type the error parameter
+    }, (error: any) => {
       console.error('Error fetching customers:', error);
     });
   }
   
-
   loadRoomAvailability() {
     this.bookingService.getRoomAvailability().subscribe((data: any) => {
       this.roomAvailability = data;
@@ -52,41 +51,33 @@ export class BookingComponent implements OnInit {
   }
 
   onSubmit() {
-    // Get check-in and check-out dates from the form
     const checkInDate = this.bookingForm.get('checkInDate')?.value;
     const checkOutDate = this.bookingForm.get('checkOutDate')?.value;
 
-    // Calculate the number of days between check-in and check-out dates
-    const oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
+    const oneDay = 24 * 60 * 60 * 1000;
     const checkInTime = new Date(checkInDate).getTime();
     const checkOutTime = new Date(checkOutDate).getTime();
     const numberOfDays = Math.round(Math.abs((checkOutTime - checkInTime) / oneDay));
 
-    // Fetch the price from the room based on the selected room ID
-    const roomId = this.roomId; // Use the roomId property
-    const room = this.roomAvailability.find((room: any) => room.roomId === roomId); // Provide type for room parameter
+    const roomId = this.roomId;
+    const room = this.roomAvailability.find((room: any) => room.roomId === roomId);
     if (!room) {
       console.error('Room not found.');
       return;
     }
-    const roomPrice = room.price; // Assuming the price is directly available in the room object
+    const roomPrice = room.price;
 
-    // Calculate the total price based on the room price and number of days
     const totalPrice = numberOfDays * roomPrice;
 
-    // Update the price and days fields in the form
+    // Set the calculated price to the form control
     this.bookingForm.patchValue({
-      price: totalPrice,
-      days: numberOfDays
+      price: totalPrice
     });
 
-    // Submit the booking form
     this.bookingService.createBooking(this.bookingForm.value).subscribe((response: any) => {
       console.log('Booking created successfully:', response);
-      // Optionally, navigate to a different page after successful booking
     }, (error) => {
       console.error('Error creating booking:', error);
     });
   }
-
 }
