@@ -14,12 +14,9 @@
       <input type="date" formControlName="checkOutDate" id="checkOutDate">
       <br>
       <label for="price">Price:</label>
-      <input type="text" formControlName="price" id="price">
+      <input type="text" formControlName="price" id="price" [disabled]="true">
       <br>
-      <label for="days">Days:</label>
-      <input type="text" formControlName="days" id="days">
-      <br>
+      <!-- Remove the days input field -->
       <button type="submit" [disabled]="!bookingForm.valid">Book Now</button>
     </form>
-  </div>
-  
+</div>

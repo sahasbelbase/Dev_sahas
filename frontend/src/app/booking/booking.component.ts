@@ -41,8 +41,27 @@ export class BookingComponent implements OnInit {
   }
 
   onSubmit() {
-    // Logic to calculate price and days based on check-in and check-out dates
-    // Then submit the booking form
+    // Get check-in and check-out dates from the form
+    const checkInDate = this.bookingForm.get('checkInDate')?.value;
+    const checkOutDate = this.bookingForm.get('checkOutDate')?.value;
+  
+    // Calculate the number of days between check-in and check-out dates
+    const oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
+    const checkInTime = new Date(checkInDate).getTime();
+    const checkOutTime = new Date(checkOutDate).getTime();
+    const numberOfDays = Math.round(Math.abs((checkOutTime - checkInTime) / oneDay));
+  
+    // Calculate the price based on the number of days and any other relevant factors
+    const pricePerDay = 100; // Example price per day
+    const totalPrice = numberOfDays * pricePerDay;
+  
+    // Update the price and days fields in the form
+    this.bookingForm.patchValue({
+      price: totalPrice,
+      days: numberOfDays
+    });
+  
+    // Submit the booking form
     this.bookingService.createBooking(this.bookingForm.value).subscribe((response: any) => {
       console.log('Booking created successfully:', response);
       // Optionally, navigate to a different page after successful booking
@@ -50,4 +69,4 @@ export class BookingComponent implements OnInit {
       console.error('Error creating booking:', error);
     });
   }
-}
+}  
