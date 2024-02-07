@@ -1,5 +1,3 @@
-<!-- invoice-form.component.html -->
-
 <div class="invoice-container">
   <span class="invoice-close" (click)="closeInvoice()">&times;</span>
   <div class="invoice">
@@ -41,6 +39,9 @@
           <label for="dueDate">Due Date</label>
           <input type="text" id="dueDate" [(ngModel)]="invoiceData.dueDate" name="dueDate" readonly>
         </div>
+        <div class="form-group">
+          <button class="print-button" onclick="window.print()">Print</button>
+        </div>       
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@
 }
 
 .mat-toolbar {
-  background-color: #2c3e50; /* Manly color for toolbar */
+  background-color: #2c3e50; 
 }
 
 .container {
@@ -21,19 +21,19 @@
 
 .sidenav {
   padding: 20px;
-  width: 250px; /* Initial width */
+  width: 250px;
 }
 
 .custom-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #ffffff; /* White text color */
+  color: #ffffff; 
 }
 
 .sidenav {
   width: 250px;
-  transition: width 0.3s; /* Smooth transition on width change */
+  transition: width 0.3s;
 }
 
 .left-drawer {
@@ -50,7 +50,7 @@
   right: 0;
   bottom: 0;
   width: 100%;
-  height: 250px; /* Adjust the height as needed */
+  height: 250px;  
 }
 
 .close-button {
@@ -60,13 +60,13 @@
 }
 
 .sidenav-expanded {
-  width: 300px; /* Expanded width on click */
+  width: 300px; 
 }
 
 .navlink {
-  color: #34495e; /* Manly color for navigation links */
+  color: #34495e; 
 }
 
 .icon {
-  color: #ecf0f1; /* Light gray color for icons */
+  color: #ecf0f1; 
 }

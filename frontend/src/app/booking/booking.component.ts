@@ -11,8 +11,8 @@ import { BookingService } from './booking.service';
 export class BookingComponent implements OnInit {
   bookingForm: FormGroup;
   customers: any[] = [];
-  roomId!: number; // Initialize roomId here or use '!' operator
-  roomAvailability: any[] = []; // Add roomAvailability property
+  roomId!: number; 
+  roomAvailability: any[] = []; 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,13 +23,13 @@ export class BookingComponent implements OnInit {
       customerId: ['', Validators.required],
       checkInDate: ['', Validators.required],
       checkOutDate: ['', Validators.required],
-      price: [''], // No need for the price field here
-      days: [''] // No need for the days field here
+      price: [''], 
+      days: [''] 
     });
   }
 
   ngOnInit(): void {
-    this.roomId = this.route.snapshot.params['roomId']; // Get roomId from route parameters
+    this.roomId = this.route.snapshot.params['roomId'];
     this.loadCustomers();
     this.loadRoomAvailability();
   }
@@ -69,7 +69,7 @@ export class BookingComponent implements OnInit {
 
     const totalPrice = numberOfDays * roomPrice;
 
-    // Set the calculated price to the form control
+
     this.bookingForm.patchValue({
       price: totalPrice
     });

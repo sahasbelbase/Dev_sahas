@@ -1,5 +1,3 @@
-// invoice.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { InvoiceService } from './invoice.service';
@@ -37,16 +35,11 @@ export class InvoiceComponent implements OnInit {
   }
 
   getCustomerName(customerId: number): string {
-    // Make an API call to fetch customer details based on customerId
-    // Return the customer name
-    // Replace the following line with your actual API call
     return `Customer ${customerId}`;
   }
 
   getBranchName(branchName: string): string {
-    // Make an API call to fetch branch details based on userPersonId
-    // Return the branch name
-    // Replace the following line with your actual API call
+
     return `Branch ${branchName}`;
   }
 

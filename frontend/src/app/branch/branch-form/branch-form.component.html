@@ -2,7 +2,7 @@
   <mat-form-field>
     <mat-label>Select Hotel ID</mat-label>
     <mat-select [(ngModel)]="formData.hotelId" name="hotelId" required>
-      <!-- Populate this with available hotel IDs -->
+
       <mat-option *ngFor="let hotel of hotelData" [value]="hotel.hotelId">
         {{ hotel.name }} - {{ hotel.hotelId }}
       </mat-option>
@@ -12,7 +12,7 @@
   <mat-form-field>
     <mat-label>Select Address Type ID</mat-label>
     <mat-select [(ngModel)]="formData.addressTypeId" name="addressTypeId" required>
-      <!-- Populate this with available address type IDs -->
+
       <mat-option *ngFor="let type of addressTypes" [value]="type.addressTypeId">
         {{ type.type }} - {{ type.addressTypeId }}
       </mat-option>

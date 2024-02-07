@@ -8,7 +8,7 @@
 
 <mat-drawer-container class="container" autosize>
 
-  <!-- Left Drawer -->
+
   <mat-drawer #leftDrawer class="sidenav left-drawer" mode="side">
     <mat-list *ngFor="let item of navigationList">
       <a routerLinkActive="mat-primary" [ngClass]="'navlink'" active routerLink="/{{ item.link }}" mat-button>
@@ -21,7 +21,7 @@
     </button>
   </mat-drawer>
 
-  <!-- Bottom Drawer -->
+
   <mat-drawer #bottomDrawer class="sidenav bottom-drawer" mode="over">
     <mat-list *ngFor="let item of navigationList">
       <a routerLinkActive="mat-primary" [ngClass]="'navlink'" active routerLink="/{{ item.link }}" mat-button>

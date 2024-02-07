@@ -91,7 +91,7 @@ def getAllPersonsWithAddress():
     result = []
     for p in persons:
         person_data = personSchema.dump(p)
-        person_data['personAddress'] = personAddressSchema.dump(p.personAddress)  # Assuming person has a personAddress relationship
+        person_data['personAddress'] = personAddressSchema.dump(p.personAddress) 
         result.append(person_data)
     return jsonify(result), 200
 
@@ -149,11 +149,11 @@ def createOrUpdateHotelAddress():
     action = data.get('action')
 
     if action.lower() == 'submit':
-        # Assuming 'hotel_address_data' is a dictionary with the necessary information
+        #  'hotel_address_data' is a dictionary with the necessary information
         new_hotel_address = hotelAddress(
             hotelID=hotel_address_data.get('hotelID'),
             addressID=hotel_address_data.get('addressID')
-            # Add other fields as needed
+            
         )
 
         # Fetch the associated hotel
@@ -166,7 +166,7 @@ def createOrUpdateHotelAddress():
             db.session.commit()
 
             result = hotelAddressSchema.dump(new_hotel_address)
-            return jsonify(result), 201  # Adjust 'result' based on your actual response
+            return jsonify(result), 201  
         else:
             return jsonify({'message': 'Hotel not found'}), 404
     else:
@@ -204,7 +204,7 @@ def get_all_branch_addresses():
 @app.route('/addBranch', methods=['POST'])
 def add_branch():
     try:
-        data = request.json  # Assuming the data is sent as JSON
+        data = request.json  
 
         # Extract data from the request
         branch_data = data.get('branchData', {})
@@ -249,7 +249,7 @@ def add_branch():
         return jsonify({"message": "Branch added successfully"}), 201
 
     except Exception as e:
-        # Log the error or handle it as needed
+
         print(f"Error adding branch: {str(e)}")
         return jsonify({"error": "An error occurred while adding the branch"}), 500
 
@@ -390,7 +390,7 @@ def get_room_availability():
     try:
         rooms = room.query.all()
         room_availability = []
-        for room_obj in rooms:  # Rename the loop variable to avoid conflict
+        for room_obj in rooms:  
             room_data = {
                 'roomNumber': room_obj.roomNumber,
                 'roomTypeID': room_obj.roomTypeID,
@@ -409,9 +409,7 @@ def createBooking():
         data = request.json
 
         if 'action' in data and data['action'] == 'bookingTsk':
-            # Handle bookingTsk logic here
-            # Extract and process JSON data as needed
-            # ...
+
 
             return jsonify({"success": True, "message": "bookingTsk processed"}), 200
 
@@ -426,8 +424,6 @@ def createBooking():
 
         db.session.add(new_booking)
         db.session.commit()
-
-        # Assuming you have a method to generate an invoice or booking confirmation
         invoice_result = generate_invoice(new_booking)
 
         return jsonify({
@@ -502,7 +498,7 @@ def createFacility():
     db.session.commit()
     return jsonify(facilitySchema.dump(newFacility)), 201
 
-# Modify the getAllInvoices route in app.py
+
 @app.route('/invoices', methods=['GET'])
 def getAllInvoices():
     invoices = invoice.query.join(customer).all()
@@ -532,9 +528,6 @@ def create_or_update_invoice():
         data = request.json
 
         if 'action' in data and data['action'] == 'invoiceTsk':
-            # Handle invoiceTsk logic here
-            # Extract and process JSON data as needed
-            # ...
 
             return jsonify({"success": True, "message": "invoiceTsk processed"}), 200
 

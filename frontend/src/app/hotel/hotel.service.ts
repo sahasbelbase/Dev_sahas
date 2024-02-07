@@ -10,22 +10,22 @@ export class HotelService {
 
   constructor(public http: HttpClient) {}
 
-  // Fetch hotel data
+
   getHotelData(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/hotels`);
   }
 
-  // Fetch hotel data with address information
+
   getHotelDataWithAddress(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/hotelsWithAddress`);
   }
 
-  // Handle hotel task (create/update)
+
   HotelTsk(json: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/hotels`, { json });
   }
 
-  // Handle hotel address task (create/update)
+
   HotelAddressTsk(json: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/hotelAddress`, { json });
   }

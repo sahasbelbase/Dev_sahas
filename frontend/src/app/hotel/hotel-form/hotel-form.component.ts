@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HotelService } from '../hotel.service';
 
-// Define the HotelObject interface
+
 interface HotelObject {
   hotelId: number;
   addressTypeId: string;
@@ -20,7 +20,7 @@ interface HotelObject {
   styleUrls: ['./hotel-form.component.scss']
 })
 export class HotelFormComponent implements OnInit {
-  // Initialize hotelObject as an instance of HotelObject
+
   hotelObject: HotelObject = {
     hotelId: 0,
     addressTypeId: '',

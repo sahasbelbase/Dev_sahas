@@ -16,7 +16,7 @@ export class BranchFormComponent {
   constructor(private branchService: BranchService) {}
 
   ngOnInit(): void {
-    // Fetch necessary data for dropdowns, e.g., hotelData, addressTypes
+
     this.branchService.getHotels().subscribe((hotels) => {
       this.hotelData = hotels;
     });
@@ -27,7 +27,7 @@ export class BranchFormComponent {
   }
 
   onSubmit() {
-    // Implement logic to submit the form data to the server
+
     
     this.branchService.addBranch(this.formData).subscribe(
       (response) => {

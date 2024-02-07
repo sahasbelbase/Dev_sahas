@@ -18,7 +18,7 @@ export class BookingService {
     return this.http.post(`${this.baseUrl}/bookings`, bookingData);
   }
 
-  // Add the method to fetch room availability
+
   getRoomAvailability(): Observable<any> {
     return this.http.get(`${this.baseUrl}/room_availability`);
   }
